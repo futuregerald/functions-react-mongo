@@ -16,7 +16,7 @@ This function takes a JSON payload that includes the user's Identity ID and uses
 
 ## validate-user.go
 
-This function is triggered by Netlify Identity for each signup and validates the e-mail of the user.
+This function is triggered by Netlify Identity for each signup and validates the e-mail of the user, and assigns the `netlifriend` role.
 
 ## Demo site:
 
