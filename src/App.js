@@ -90,6 +90,9 @@ const Home = props => {
   const uploadImage = async () => {
     try {
       const image = fileInputRef.current.files[0];
+      if (image.size > 5242880){
+        throw new Error("This file is too big, has to be less than 5mb")
+      }
       const response = await axios.post(
         '/.netlify/functions/get-upload-url/',
         JSON.stringify({ fileName: image.name, type: image.type })
