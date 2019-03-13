@@ -1,5 +1,5 @@
 [build]
-  command = "yarn build"
+  command = "yarn build; sleep 500"
   functions = "lambda"
   publish = "build"
 [build.environment]

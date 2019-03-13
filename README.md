@@ -12,7 +12,11 @@ This function takes a JSON payload from the frontend and uses it to update or cr
 
 ## get-user-details.js
 
-This function takes a JSON payload that includes the user's Identity ID and uses it to find the document containing that user's details, then return it to the frontend client
+This function takes a JSON payload that includes the user's Identity ID and uses it to find the document containing that user's details, then return it to the frontend client.
+
+## validate-user.go
+
+This function is triggered by Netlify Identity for each signup and validates the e-mail of the user.
 
 ## Demo site:
 
