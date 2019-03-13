@@ -1,6 +1,6 @@
 [build]
-  command = "yarn build; sleep 500"
+  command = "yarn build"
   functions = "lambda"
   publish = "build"
 [build.environment]
-    GO_IMPORT_PATH="github.com/netlify/functions-react-mongo"
+    GO_IMPORT_PATH="github.com/futuregerald/functions-react-mongo"
