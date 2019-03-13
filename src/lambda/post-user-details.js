@@ -50,7 +50,7 @@ exports.handler = async function(event, context, callback) {
   }
 
   const UserModel = conn.model('User');
-  const user = new UserModel(body);
+  // const user = new UserModel(body);
   const newUser = await UserModel.findOneAndUpdate({IdentityID: body.IdentityID}, body,{upsert: true, new: true, runValidators: true}, 
     (err,doc)=>{if (err){
       console.log(err)
