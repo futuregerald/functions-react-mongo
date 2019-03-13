@@ -138,16 +138,16 @@ const Home = props => {
             }
           }
         );
-        const { Address, AvatarUrl, Email } = response.data;
-        if (Address) {
-          setAddress(Address);
+        
+        if (response.data.Address) {
+          setAddress(response.data.Address);
         }
-        if (AvatarUrl) {
-          setAvatarUrl(AvatarUrl);
+        if (response.data.AvatarUrl) {
+          setAvatarUrl(response.data.AvatarUrl);
         }
 
-        if (Email) {
-          setEmail(Email);
+        if (response.data.Email) {
+          setEmail(response.data.Email);
         }
       } catch (err) {
         console.log(err);
