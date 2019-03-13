@@ -129,6 +129,8 @@ const Home = props => {
 
   useEffect(() => {
     (async () => {
+      if (!localStorage.getItem('gotrue.user')) {
+        return}
       try {
         const response = await axios.post(
           '/.netlify/functions/get-user-details/',
