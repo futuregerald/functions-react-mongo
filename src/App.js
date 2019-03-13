@@ -41,10 +41,12 @@ const StyledClickMeImage = styled(Image)`
 `;
 
 const Home = props => {
+  window.netlifyIdentity = netlifyIdentity;
   const fileInputRef = useRef(null);
   const [avatarUrl, setAvatarUrl] = useState(blank);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [address, setAddress] = useState('');
+  const [email, setEmail] = useState('');
   const [showModal, setShowModal] = useState(false);
   netlifyIdentity.on('login', user => setIsLoggedIn(true));
   useEffect(() => {
@@ -56,6 +58,7 @@ const Home = props => {
         .jwt()
         .then(jwt => {
           setIsLoggedIn(true);
+          setEmail(netlifyIdentity.currentUser().email);
         })
         .catch(err => {
           console.log(err);
@@ -121,28 +124,36 @@ const Home = props => {
     }
   };
 
-  useEffect(async () => {
-    try {
-      const response = await axios.post(
-        '/.netlify/functions/get-user-details/',
-        JSON.stringify({
-          IdentityID: netlifyIdentity.currentUser().id
-        }),
-        {
-          headers: {
-            'Content-Type': 'application/json'
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await axios.post(
+          '/.netlify/functions/get-user-details/',
+          JSON.stringify({
+            IdentityID: netlifyIdentity.currentUser().id
+          }),
+          {
+            headers: {
+              'Content-Type': 'application/json'
+            }
           }
+        );
+        const { Address, AvatarUrl, Email } = response.data;
+        if (Address) {
+          setAddress(Address);
         }
-      );
-      const { Address, AvatarUrl } = response.data;
-      if (Address) {
-        setAddress(Address);
+        if (AvatarUrl) {
+          setAvatarUrl(AvatarUrl);
+        }
+
+        if (Email) {
+          setEmail(Email);
+        }
+      } catch (err) {
+        console.log(err);
       }
-      if (AvatarUrl) {
-        setAvatarUrl(AvatarUrl);
-      }
-    } catch (err) {}
-  }, []);
+    })();
+  }, [avatarUrl, email, isLoggedIn]);
 
   return (
     <>
@@ -180,14 +191,14 @@ const Home = props => {
                     </form>
 
                     <Card.Content>
-                      <Card.Header>Email: </Card.Header>
+                      <Card.Header>Email:{email} </Card.Header>
 
                       <Card.Description>
                         {address ? `Address: ${address}` : ''}
                       </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                      <a>
+                      <a href="#">
                         <Icon name="user" />
                         22 Friends
                       </a>
@@ -207,9 +218,16 @@ const Home = props => {
                       type="Save Address to my profile"
                       onClick={saveAddress}
                     >
-                      Submit
+                      Save my address!
                     </Button>
                   </Form>
+                  <br />
+                  <Button
+                    content="Log me out, log me out!"
+                    icon="key"
+                    labelPosition="left"
+                    onClick={() => netlifyIdentity.open()}
+                  />
                 </>
               ) : (
                 <Button
