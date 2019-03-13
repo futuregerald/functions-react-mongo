@@ -13,3 +13,7 @@ This function takes a JSON payload from the frontend and uses it to update or cr
 ## get-user-details.js
 
 This function takes a JSON payload that includes the user's Identity ID and uses it to find the document containing that user's details, then return it to the frontend client
+
+## Demo site:
+
+https://lambda-profile-demo.netlify.com/
