@@ -11,6 +11,7 @@ exports.handler = function(event, context, callback) {
     SECRET_ACCESS_KEY,
     ACCESS_KEY_ID,
     BUCKET,
+    CLOUDFRONT_URL
   } = process.env;
   AWS.config.update({
     accessKeyId: ACCESS_KEY_ID,
@@ -28,7 +29,7 @@ exports.handler = function(event, context, callback) {
     ContentType: body.type,
     Expires: signedUrlExpireSeconds,
   });
-  const publicUrl = `https://d7p0c2qzpgwhi.cloudfront.net/${key}`
+  const publicUrl = `${CLOUDFRONT_URL}${key}`
 
   console.log(url, key);
 
