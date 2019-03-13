@@ -39,7 +39,7 @@ type userInfo struct {
 
 func validateUser(email string) bool {
 	s := strings.Split(email, "@")
-	if len(s) == 2 && s[1] == "netlify.com" {
+	if len(s) == 2 && s[1] != "fakedomain.com" {
 		return true
 	}
 	return false
