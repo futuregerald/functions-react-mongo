@@ -35,6 +35,6 @@ exports.handler = function(event, context, callback) {
 
   callback(null, {
     statusCode: 200,
-    body: JSON.stringify({ uploadUrl: url, publicUrl: publicUrl }),
+    body: JSON.stringify({ uploadUrl: url, publicUrl: publicUrl,andrew:"is awesome" }),
   });
 };
