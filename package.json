@@ -25,7 +25,7 @@
     "start:lambda": "netlify-lambda serve src/lambda --port 9090",
     "build": "run-p build:**",
     "build:app": "react-scripts build",
-    "build:lambda": "netlify-lambda build src/lambda",
+    "build:lambda": "netlify-lambda build src/lambda && go build -o lambda/validate-user ./src/lambda/validate-user.go",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
