@@ -141,7 +141,8 @@ const Home = props => {
             }
           }
         );
-        
+        if (response.data != null){ 
+       
         if (response.data.Address) {
           setAddress(response.data.Address);
         }
@@ -152,6 +153,7 @@ const Home = props => {
         if (response.data.Email) {
           setEmail(response.data.Email);
         }
+      }
       } catch (err) {
         console.log(err);
       }
